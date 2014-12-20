@@ -1,0 +1,27 @@
+{
+	"manifest_version": 2,
+
+  "name": "Think Again",
+  "description": "Reminds you to think again before launching those website that always waste your time.",
+  "version": "0.1",
+  
+  "background": {
+  	"scripts": ["background.js"]
+  },
+
+	"content_scripts": [{
+			"matches": ["http://*/*"],
+  		"js": ["check.js"]
+ 	}],
+
+  "options_page": "options.html",
+
+  "permissions": [
+  	"storage", "tabs"
+  ],
+
+  "browser_action": {
+		"default_icon": "thumbs-up.png",
+		"default_popup": "popup.html"
+  } 
+}
