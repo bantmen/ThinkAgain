@@ -1,3 +1,4 @@
+// Updates th current list of monitored websites
 function update_current() {
   console.log('update');
   chrome.storage.sync.get({pages: []}, function(result) {
@@ -6,6 +7,7 @@ function update_current() {
   });
 }
 
+// Adds a new page to our monitoring list
 function save_page() {
   chrome.storage.sync.get({pages: []}, function(result) {
     var webpages = result.pages;
@@ -24,6 +26,7 @@ function save_page() {
     });
 }
 
+// Removes a page from our list
 function remove_page() {
   var remove = document.getElementById('old_page').value;
   chrome.storage.sync.get({pages: []}, function(result) {

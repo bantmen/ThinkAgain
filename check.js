@@ -1,3 +1,7 @@
+/*
+* Checks whether the newly launched website is in our list 
+* or not, and if so then prompts the dialog
+*/
 function check_page(url) {
 	chrome.storage.sync.get({pages: []}, function(result) {
 		var webpages = result.pages;
@@ -14,7 +18,7 @@ function check_page(url) {
 				else {
 					console.log('not cont.');
 					chrome.runtime.sendMessage({action: "close_current_tab"}, function(response) {
-				  		console.log('sent message');
+				  		console.log('response:');
 				  		console.log(response.reaction);
 					});
 				}

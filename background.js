@@ -3,11 +3,10 @@ chrome.runtime.onMessage.addListener(
 		console.log('received message');
 		console.log(message.greeting);
 		if (message.action == 'close_current_tab') {
-			chrome.tabs.getCurrent(function(tab) {
-				// sendResponse({reaction:'close'});
-    			chrome.tabs.remove(tab.id, function() {
-    				//
-    			});
+			chrome.tabs.query({
+				active: true, currentWindow: true
+			}, function(tabs) {
+				sendResponse({reaction: 'a'});
 			});
 			sendResponse({reaction:'closed the tab'});
 		}
