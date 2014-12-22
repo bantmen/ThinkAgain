@@ -14,6 +14,10 @@ function check_page(url) {
 				console.log('is monitored');
 				if (confirm('This website is on your "Think Again" list! Are you sure that you want to continue?')) {
 					console.log('cont.');
+					chrome.runtime.sendMessage({action: "resume_timer"}, function(response) {
+				  		console.log('response:');
+				  		console.log(response.reaction);
+					});
 				}
 				else {
 					console.log('not cont.');
