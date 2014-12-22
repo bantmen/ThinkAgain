@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head><title>My Test Extension Options</title></head>
-<body>
+<body style="width:30em;">
 
-<p>Monitor new website:</p><input type="text" id="new_page">
-<input type="button" id="save_page" value="Add to the list">
-<div id="new_page_status"></div>
+	<h2>Monitor new website:</h2><input type="text" id="new_page">
+	<input type="button" id="save_page" value="Add to the list">
+	<div id="new_page_status"></div>
 
-<br>
+	<br>
 
-<p>Currently monitoring:</p>
-<div id="current_list"></div>
+	<h3>Currently monitoring:</h3>
+	<div id="current_list"></div><br>
+
+	<h3>Remove a website from the list:</h3><input type="text" id="old_page">
+	<input type="button" id="remove_page" value="Remove from the list">
+	<div id="old_page_status"></div>
+
+	<br><br><a href="popup.html">Go Back</a>
 
 <script src="options.js"></script>
 </body>

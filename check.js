@@ -13,7 +13,10 @@ function check_page(url) {
 				}
 				else {
 					console.log('not cont.');
-					chrome.runtime.sendMessage('test');
+					chrome.runtime.sendMessage({action: "close_current_tab"}, function(response) {
+				  		console.log('sent message');
+				  		console.log(response.reaction);
+					});
 				}
 				return 1;
 			}
