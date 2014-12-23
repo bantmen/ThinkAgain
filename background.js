@@ -68,5 +68,5 @@ function update_timer(url) {
 	});
 }
 
-// Force an update of the counter every minute. 
+// Force an update of the timer every minute. 
 window.setInterval(update_timer, MINUTE);
