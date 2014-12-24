@@ -1,5 +1,5 @@
 var MINUTE = 60000;
-var FAST_MINUTE = MINUTE/5;  // for debugging
+var FAST_MINUTE = MINUTE/10;  // for debugging
 
 localStorage['state'] = 'initialized';
 
@@ -77,24 +77,8 @@ function update_timer(url) {
 	});
 }
 
-function is_monitored(url) {
-	chrome.storage.sync.get({pages: []}, 
-		function(result) {
-			var websites = result.pages;
-			var current_url;
-			for (var i=0; i<websites.length; i++) {
-				current_url = websites[i];
-				if (current_url.indexOf(url) > -1) {
-					return true;
-				}
-			}
-			return false;
-		}
-	);
-}
-
 function update_timer_check() {
-	chrome.tabs.query({currentWindow: true}, 
+	chrome.tabs.query({active: true, currentWindow: true},
 		function(tabs) {
 			chrome.windows.get(tabs[0].windowId, 
 				function(window) {
@@ -105,11 +89,12 @@ function update_timer_check() {
 							var current_url;
 							for (var i=0; i<websites.length; i++) {
 								current_url = websites[i];
-								if (current_url.indexOf(url) > -1) {
+								if (url.indexOf(current_url) > -1) {
+									console.log(url+" is monitored");
 									return update_timer(url);
 								}
 							}
-							console.log(url+" not monitored");
+							console.log(url+" is not monitored");
 							return false;
 						}
 						);
