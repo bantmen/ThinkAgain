@@ -17,7 +17,7 @@ function save_page() {
     chrome.storage.sync.set({pages: webpages}, 
       function() {
           var status = document.getElementById('new_page_status');
-          status.textContent = new_page+' was added to the list.';
+          status.textContent = new_page + ' was added to the list.';
           setTimeout(function() {
             status.textContent = '';
             update_current();
@@ -41,7 +41,7 @@ function remove_page() {
     chrome.storage.sync.set({pages: webpages}, 
       function() {
         var status = document.getElementById('old_page_status');
-        status.textContent = remove+' was removed from the list.';
+        status.textContent = remove + ' was removed from the list.';
         setTimeout(function() {
           status.textContent = '';
           update_current();
