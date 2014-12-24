@@ -1,5 +1,4 @@
-var MINUTE = 60000;
-var FAST_MINUTE = MINUTE/10;  // for debugging
+var delta_t = 6000;
 
 localStorage['state'] = 'initialized';
 
@@ -27,13 +26,13 @@ chrome.runtime.onMessage.addListener(
 		return true;
 });
 
-// Resumes the timer for a listed website
+// Resumes the timer for a listed website -> state: resumed
 function resume_timer(url, sendResponse) {
 	localStorage['state'] = 'resumed';
 	sendResponse({reaction: 'true'});
 }
 
-// Pauses the timer for a listed website and saves it
+// Pauses the timer for a listed website -> state: paused
 function pause_timer(url, sendResponse) {
 	localStorage['state'] = 'paused';
 	sendResponse({reaction: 'true'});
@@ -61,12 +60,12 @@ function update_timer(url) {
 		// Continue from the previous timer
 		if (timers[url]) {
 			console.log('cont timer');
-			timers[url] += FAST_MINUTE;
+			timers[url] += delta_t;
 		}
 		// If doesn't exist, then create a new one
 		else {
 			console.log('new timer');
-			timers[url] = FAST_MINUTE;
+			timers[url] = delta_t;
 		}
 		var current_timer = timers[url];
 		chrome.storage.sync.set({time_dict: timers}, 
@@ -91,7 +90,7 @@ function update_timer_check() {
 								current_url = websites[i];
 								if (url.indexOf(current_url) > -1) {
 									console.log(url+" is monitored");
-									return update_timer(url);
+									return update_timer(current_url);
 								}
 							}
 							console.log(url+" is not monitored");
@@ -108,4 +107,7 @@ function update_timer_check() {
 }
 
 // Force an update of the timer every minute. 
-window.setInterval(update_timer_check, FAST_MINUTE);
+window.setInterval(update_timer_check, delta_t);
+
+
+
