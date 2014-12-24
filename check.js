@@ -1,3 +1,4 @@
+console.log('inside check.js');
 /*
 * Checks whether the newly launched website is in our list 
 * or not, and if so then prompts the dialog
@@ -12,7 +13,7 @@ function check_page(url) {
 			console.log(current);
 			if (url.indexOf(current) > -1) {
 				console.log('is monitored');
-				if (confirm('This website is on your "Think Again" list! Are you sure that you want to continue?')) {
+				if (confirm('You spent X hours today, and Y hours this week on N. Are you sure that you want to continue?')) {
 					console.log('cont.');
 					chrome.runtime.sendMessage({
 						action: "resume_timer", url: url 

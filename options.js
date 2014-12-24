@@ -51,6 +51,12 @@ function remove_page() {
   console.log(remove);
 }
 
+function change_frequency() {
+  chrome.storage.sync.get({frequencies: {}}, function(result) {
+    
+  });
+}
+
 document.addEventListener('DOMContentLoaded', update_current());
 document.getElementById('save_page').addEventListener('click', save_page);
 document.getElementById('remove_page').addEventListener('click', remove_page);
