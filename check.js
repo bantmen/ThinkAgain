@@ -1,4 +1,3 @@
-console.log('inside check.js');
 /*
 * Checks whether the newly launched website is in our list 
 * or not, and if so then prompts the dialog

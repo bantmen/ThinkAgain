@@ -1,7 +1,5 @@
 var delta_t = 6000;
 
-localStorage['state'] = 'initialized';
-
 /*
 * Listens for the requests from check.js.
 */
@@ -27,6 +25,7 @@ chrome.runtime.onMessage.addListener(
 });
 
 // Resumes the timer for a listed website -> state: resumed
+// Afterwards, makes sure that today's date is added to date_time_dict
 function resume_timer(url, sendResponse) {
 	localStorage['state'] = 'resumed';
 	sendResponse({reaction: 'true'});
@@ -53,27 +52,49 @@ function update_timer(url) {
 	if (!localStorage['state'] == 'resumed') {
 		return ;
 	}
-	chrome.storage.sync.get({time_dict: {}}, function(result) {
-		console.log('inside timer');
-		var timers = result.time_dict;
-		console.log(timers);
-		// Continue from the previous timer
-		if (timers[url]) {
-			console.log('cont timer');
-			timers[url] += delta_t;
+	chrome.storage.sync.get({time_dict: {}, date_time_dict: {}}, 
+		function(result) {
+			console.log('inside update');
+			var timers = result.time_dict;
+			console.log(timers);
+			// Continue from the previous timer
+			if (timers[url]) {
+				console.log('cont timer');
+				timers[url] += delta_t;
+			}
+			// If doesn't exist, then create a new one
+			else {
+				console.log('new timer');
+				timers[url] = delta_t;
+			}
+			var date_timers = result.date_time_dict;
+			var now = new Date().toJSON().slice(0,10)
+			// If today's date wasn't added to the dict yet
+			if (!date_timers[now]) {
+				date_timers[now] = {}
+			}
+			// If the url was not introduced today yet
+			if (date_timers[now][url]) {
+				date_timers[now][url] += delta_t;
+			}
+			else {
+				date_timers[now][url] = delta_t;
+			}
+			var current_timer = timers[url];
+			chrome.storage.sync.set({time_dict: timers}, 
+				function() {
+					console.log(current_timer);
+					console.log('set new timer');
+				}
+			);
+			chrome.storage.sync.set({date_time_dict: date_timers}, 
+				function() {
+					console.log(date_timers);
+					console.log('set new date timer');
+				}
+			);
 		}
-		// If doesn't exist, then create a new one
-		else {
-			console.log('new timer');
-			timers[url] = delta_t;
-		}
-		var current_timer = timers[url];
-		chrome.storage.sync.set({time_dict: timers}, 
-			function() {
-				console.log(current_timer);
-				console.log('set new timer');
-			});
-	});
+	);
 }
 
 function update_timer_check() {
