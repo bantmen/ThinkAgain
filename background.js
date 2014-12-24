@@ -95,8 +95,7 @@ function update_timer_check() {
 							}
 							console.log(url+" is not monitored");
 							return false;
-						}
-						);
+						});
 					}
 					else {
 						console.log("window not focused");
