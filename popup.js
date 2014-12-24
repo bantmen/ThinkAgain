@@ -10,8 +10,9 @@ function update_current() {
   			current_website = websites[i];
   			current_timer = timers[current_website];
   			current_hours = (current_timer/1000/60/60).toFixed(2);
+  			if (isNaN(current_hours)) current_hours = '0.00';
   			updated_text_build.push(current_website, ' : ', 
-  							  current_hours, ' hours\n');
+  							 							  current_hours, ' hours\n');
   		}
   		console.log(updated_text_build.join());
   		document.getElementById('status').innerText = updated_text_build.join('');

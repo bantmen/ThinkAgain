@@ -48,6 +48,7 @@ function close_current_tab() {
 	});
 }
 
+// Updates the timer
 function update_timer(url) {
 	if (!localStorage['state'] == 'resumed') {
 		return ;
@@ -59,12 +60,10 @@ function update_timer(url) {
 			console.log(timers);
 			// Continue from the previous timer
 			if (timers[url]) {
-				console.log('cont timer');
 				timers[url] += delta_t;
 			}
 			// If doesn't exist, then create a new one
 			else {
-				console.log('new timer');
 				timers[url] = delta_t;
 			}
 			var date_timers = result.date_time_dict;
@@ -84,19 +83,18 @@ function update_timer(url) {
 			chrome.storage.sync.set({time_dict: timers}, 
 				function() {
 					console.log(current_timer);
-					console.log('set new timer');
 				}
 			);
 			chrome.storage.sync.set({date_time_dict: date_timers}, 
 				function() {
 					console.log(date_timers);
-					console.log('set new date timer');
 				}
 			);
 		}
 	);
 }
 
+// Calls an update on time if there is focus on the window
 function update_timer_check() {
 	chrome.tabs.query({active: true, currentWindow: true},
 		function(tabs) {

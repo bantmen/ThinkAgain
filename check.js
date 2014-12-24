@@ -12,7 +12,8 @@ function check_page(url) {
 			console.log(current);
 			if (url.indexOf(current) > -1) {
 				console.log('is monitored');
-				if (confirm('You spent X hours today, and Y hours this week on N. Are you sure that you want to continue?')) {
+				var confirm_string = get_confirmation_string(current);
+				if (confirm(confirm_string)) {
 					console.log('cont.');
 					chrome.runtime.sendMessage({
 						action: "resume_timer", url: url 
@@ -38,6 +39,36 @@ function check_page(url) {
 	});
 }
 
-var current_page = window.location.href;
+function get_confirmation_string(url) {
+	chrome.storage.sync.get({time_dict: {}, date_time_dict: {}}, 
+		function(result) {
+			var timers = result.time_dict;
+			var date_timers = result.date_time_dict;
+			var now = new Date().toJSON().slice(0,10);
+			var today = new Date();
+			var today_spent = date_timers[now][url] ? date_timers[now][url] : 0; 
+			var week_spent = 0;
+			var cur_ms;
+			var cur_date;
+			for (var i=0; i<7; i++) {
+				cur_ms = new Date(today.getDate()-i);
+				cur_date = new Date(cur_ms);
+				if (date_timers[cur_date]) {
+					if (date_timers[cur_date][url]) {
+						week_spent += date_timers[cur_date][url];
+					}
+				}
+			}
+			var str_builder = [];
+			str_builder.push('You spent ', today_spent, ' hours today,', 
+							'and ', week_spent, ' hours this week on ',
+							url, '. Are you sure that you want to continue?');
+			console.log(str_builder.join());
+			return str_builder.join();
+		}
+	);
+}
 
+var current_page = window.location.href;
 check_page(current_page);
+
