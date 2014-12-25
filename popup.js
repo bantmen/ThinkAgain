@@ -1,3 +1,6 @@
+// Set the translated constants
+var HOURS = chrome.i18n.getMessage('hours');
+
 // Sets translated text based on user's language
 function set_all_text() {
 	function set_text(id) {
@@ -6,7 +9,7 @@ function set_all_text() {
 	}
 	set_text('popupTitle');
 	set_text('popupTitleExp');
-	set_text('popupBottom');
+	// set_text('popupBottom');
 }
 
 function update_current() {
@@ -23,7 +26,8 @@ function update_current() {
   			current_hours = (current_timer/1000/60/60).toFixed(2);
   			if (isNaN(current_hours)) current_hours = '0.00';
   			updated_text_build.push(current_website, ' : ', 
-  							 							  current_hours, ' hours\n');
+  							 							  current_hours, ' ', HOURS, 
+  							 							  '\n');
   		}
   		var updated_text = updated_text_build.join("");
   		console.log(updated_text);

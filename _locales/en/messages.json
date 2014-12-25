@@ -14,5 +14,9 @@
 	"hours": {
 		"message": "hours",
 		"description": "Translated text for the word 'hours'"
+	},
+	"resetTimerText": {
+		"message": "Reset the timer",
+		"description": ""
 	}
 }

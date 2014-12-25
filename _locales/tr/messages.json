@@ -1,14 +1,17 @@
 {
-	"popupTitle": {
+	"popupTitle":{
 		"message" : "Şu an bu siteler izlemede:"
 	},
-	"popupTitleExp": {
+	"popupTitleExp":{
 		"message": "(toplamda harcanılmış saat aşağıda gösterilmektedir)"
 	},
-	"popupBottom": {
+	"popupBottom":{
 		"message": "Go to the options to add more, and choose your settings."
 	},
-	"hours": {
+	"hours":{
 		"message": "saat"
+	},
+	"resetTimerText":{
+		"message": "Sayacı sıfırlayın"
 	}
 }

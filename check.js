@@ -66,7 +66,7 @@ function confirm_close(url, callback) {
 			week_spent = week_spent.toFixed(2);
 			var str_builder = [];
 			str_builder.push('You spent ', today_spent, ' hours today, ', 
-							'and ', week_spent, ' hours this week on ',
+							'and ', week_spent, ' hours these last 7 days on ',
 							url, '. Are you sure that you want to continue?');
 			var confirm_string = str_builder.join("");
 			console.log(confirm_string);

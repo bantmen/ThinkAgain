@@ -1,3 +1,15 @@
+// Set the translated constants
+
+// Sets translated text based on user's language
+function set_all_text() {
+  function set_text(id) {
+    var text = chrome.i18n.getMessage(id);
+    document.getElementById(id).innerText = text;
+  }
+  set_text('resetTimerText');
+  
+}
+
 // Updates th current list of monitored websites
 function update_current() {
   console.log('update');
@@ -62,6 +74,7 @@ function change_frequency() {
   });
 }
 
+document.addEventListener('DOMContentLoaded', set_all_text());
 document.addEventListener('DOMContentLoaded', update_current());
 document.getElementById('save_page').addEventListener('click', save_page);
 document.getElementById('remove_page').addEventListener('click', remove_page);
