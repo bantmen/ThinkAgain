@@ -3,7 +3,9 @@ function update_current() {
   console.log('update');
   chrome.storage.sync.get({pages: []}, function(result) {
     var current = document.getElementById('current_list');
-    current.textContent = result.pages.toString();
+    var tracked = result.pages.toString();
+    if (tracked) current.textContent = tracked;
+    else current.textContent = 'No websites are currently being tracked.';
   });
 }
 
@@ -12,11 +14,13 @@ function save_page() {
   chrome.storage.sync.get({pages: []}, function(result) {
     var webpages = result.pages;
     var new_page = document.getElementById('new_page').value;
+    if (!new_page) return ; // don't take empty input
     webpages.push(new_page);
     console.log(webpages);
     chrome.storage.sync.set({pages: webpages}, 
       function() {
           var status = document.getElementById('new_page_status');
+          if (!status) return ;
           status.textContent = new_page + ' was added to the list.';
           setTimeout(function() {
             status.textContent = '';
@@ -29,6 +33,7 @@ function save_page() {
 // Removes a page from our list
 function remove_page() {
   var remove = document.getElementById('old_page').value;
+  if (!remove) return ; // don't take empty input
   chrome.storage.sync.get({pages: []}, function(result) {
     var webpages = result.pages;
     for (var i=0; i<webpages.length; i++) {
@@ -53,7 +58,7 @@ function remove_page() {
 
 function change_frequency() {
   chrome.storage.sync.get({frequencies: {}}, function(result) {
-    
+
   });
 }
 

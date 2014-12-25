@@ -14,8 +14,14 @@ function update_current() {
   			updated_text_build.push(current_website, ' : ', 
   							 							  current_hours, ' hours\n');
   		}
-  		console.log(updated_text_build.join());
-  		document.getElementById('status').innerText = updated_text_build.join('');
+  		var updated_text = updated_text_build.join("");
+  		console.log(updated_text);
+  		if (updated_text) {
+  			document.getElementById('status').innerText = updated_text;
+  		}
+  		else {
+  			document.getElementById('status').innerText = 'No websites are currently being tracked.';	
+  		}
   	}
   );
 }
