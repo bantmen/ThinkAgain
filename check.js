@@ -46,25 +46,27 @@ function get_confirmation_string(url) {
 			var date_timers = result.date_time_dict;
 			var now = new Date().toJSON().slice(0,10);
 			var today = new Date();
-			var today_spent = date_timers[now][url] ? date_timers[now][url] : 0; 
+			var today_spent = ((date_timers[now] ? date_timers[now][url] : "0.00")/1000/60/60).toFixed(2); 
 			var week_spent = 0;
 			var cur_ms;
 			var cur_date;
+			console.log(today);
 			for (var i=0; i<7; i++) {
-				cur_ms = new Date(today.getDate()-i);
-				cur_date = new Date(cur_ms);
+				cur_ms = today.setDate(today.getDate()-i);
+				cur_date = new Date(cur_ms).toJSON().slice(0,10);
 				if (date_timers[cur_date]) {
 					if (date_timers[cur_date][url]) {
-						week_spent += date_timers[cur_date][url];
+						week_spent += (date_timers[cur_date][url])/1000/60/60;
 					}
 				}
 			}
+			week_spent = week_spent.toFixed(2);
 			var str_builder = [];
 			str_builder.push('You spent ', today_spent, ' hours today,', 
 							'and ', week_spent, ' hours this week on ',
 							url, '. Are you sure that you want to continue?');
-			console.log(str_builder.join());
-			return str_builder.join();
+			console.log(str_builder.join(""));
+			return str_builder.join("");
 		}
 	);
 }
