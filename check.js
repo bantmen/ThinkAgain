@@ -20,7 +20,7 @@ function check_page(url) {
 	});
 }
 
-function confirm_proceed(confirmed) {
+function confirm_proceed(confirmed, url) {
 	if (confirmed) {
 		console.log('cont.');
 		chrome.runtime.sendMessage({
@@ -71,10 +71,10 @@ function confirm_close(url, callback) {
 			var confirm_string = str_builder.join("");
 			console.log(confirm_string);
 			if (confirm(confirm_string)) {
-				callback(true);
+				callback(true, url);
 			}
 			else {
-				callback(false);
+				callback(false, url);
 			}
 		}
 	);
