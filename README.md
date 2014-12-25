@@ -1,4 +1,4 @@
 ThinkAgain
 ==========
 
-Reminds you to think again before launching those website that always waste your time. (chrome extension)
+Reminds you to think again before browsing those websites that always waste your time. (chrome extension)
