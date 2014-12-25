@@ -7,12 +7,12 @@
   "default_locale" : "en",
   
   "background": {
-  	"scripts": ["require.js", "background.js"]
+  	"scripts": ["tools.js", "background.js"]
   },
 
 	"content_scripts": [{
 			"matches": ["http://*/*", "https://*/*"],
-  		"js": ["require.js", "check.js"]
+  		"js": ["tools.js", "check.js"]
  	}],
 
   "options_page": "options.html",

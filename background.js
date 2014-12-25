@@ -1,4 +1,4 @@
-var delta_t = 6000;
+var DELTA_T = 6000;
 
 /*
 * Listens for the requests from check.js.
@@ -60,11 +60,11 @@ function update_timer(url) {
 			console.log(timers);
 			// Continue from the previous timer
 			if (timers[url]) {
-				timers[url] += delta_t;
+				timers[url] += DELTA_T;
 			}
 			// If doesn't exist, then create a new one
 			else {
-				timers[url] = delta_t;
+				timers[url] = DELTA_T;
 			}
 			var date_timers = result.date_time_dict;
 			var now = new Date().toJSON().slice(0,10)
@@ -74,19 +74,15 @@ function update_timer(url) {
 			}
 			// If the url was not introduced today yet
 			if (date_timers[now][url]) {
-				date_timers[now][url] += delta_t;
+				date_timers[now][url] += DELTA_T;
 			}
 			else {
-				date_timers[now][url] = delta_t;
+				date_timers[now][url] = DELTA_T;
 			}
 			var current_timer = timers[url];
-			chrome.storage.sync.set({time_dict: timers}, 
-				function() {
+			chrome.storage.sync.set(
+				{time_dict: timers, date_time_dict: date_timers}, function() {
 					console.log(current_timer);
-				}
-			);
-			chrome.storage.sync.set({date_time_dict: date_timers}, 
-				function() {
 					console.log(date_timers);
 				}
 			);
@@ -125,7 +121,7 @@ function update_timer_check() {
 }
 
 // Force an update of the timer every minute. 
-window.setInterval(update_timer_check, delta_t);
+window.setInterval(update_timer_check, DELTA_T);
 
 
 

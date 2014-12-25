@@ -1,3 +1,5 @@
+tools();
+
 // Set the translated constants
 var HOURS = chrome.i18n.getMessage('hours');
 
@@ -23,7 +25,7 @@ function update_current() {
   		for (var i=0; i<websites.length; i++) {
   			current_website = websites[i];
   			current_timer = timers[current_website];
-  			current_hours = (current_timer/1000/60/60).toFixed(2);
+  			current_hours = ms_to_hours(current_timer).toFixed(2);
   			if (isNaN(current_hours)) current_hours = '0.00';
   			updated_text_build.push(current_website, ' : ', 
   							 							  current_hours, ' ', HOURS, 
