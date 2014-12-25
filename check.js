@@ -82,4 +82,3 @@ function confirm_close(url, callback) {
 
 var current_page = window.location.href;
 check_page(current_page);
-

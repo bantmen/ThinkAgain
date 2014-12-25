@@ -2,8 +2,9 @@
 	"manifest_version": 2,
 
   "name": "Think Again",
-  "description": "Reminds you to think again before launching those website that always waste your time.",
+  "description": "Reminds you to think again before browsing those websites that always waste your time.",
   "version": "0.1",
+  "default_locale" : "en",
   
   "background": {
   	"scripts": ["background.js"]

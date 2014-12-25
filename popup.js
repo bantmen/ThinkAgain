@@ -1,3 +1,14 @@
+// Sets translated text based on user's language
+function set_all_text() {
+	function set_text(id) {
+		var text = chrome.i18n.getMessage(id);
+		document.getElementById(id).innerText = text;
+	}
+	set_text('popupTitle');
+	set_text('popupTitleExp');
+	set_text('popupBottom');
+}
+
 function update_current() {
   chrome.storage.sync.get({pages: [], time_dict: {}}, 
   	function(result) {
@@ -26,4 +37,5 @@ function update_current() {
   );
 }
 
+document.addEventListener('DOMContentLoaded', set_all_text());
 document.addEventListener('DOMContentLoaded', update_current());
