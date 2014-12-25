@@ -1,0 +1,18 @@
+{
+	"popupTitle": {
+		"message": "Currently monitoring these websites:", 
+		"description": "Title string for popup"
+	},
+	"popupTitleExp": {
+		"message": "(total hour spent is shown below)",
+		"description": "Explanation under popupTitle"
+	},
+	"popupBottom": {
+		"message": "Go to the <a href='options.html'>options</a> to add more, and choose your settings.",
+		"description": "Text at the bottom of popup"
+	},
+	"hours": {
+		"message": "hours",
+		"description": "Translated text for the word 'hours'"
+	}
+}
