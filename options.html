@@ -7,7 +7,7 @@
 <body style="width:30em;">
 
 	<h2>Monitor new website:</h2>
-	<input type="text" id="new_page" placeholder="Example: reddit">
+	<input type="text" id="new_page" placeholder="ex: reddit">
 	<input type="button" id="save_page" value="Add to the list">
 	<div id="new_page_status"></div>
 
@@ -17,18 +17,20 @@
 	<div id="current_list"></div><br>
 
 	<h3>Remove a website from the list:</h3>
-	<input type="text" id="old_page" placeholder="Example: reddit">
+	<input type="text" id="old_page" placeholder="ex: reddit">
 	<input type="checkbox" id="remove_timer"><span id="resetTimerText"></span>
 	<input type="button" id="remove_page" value="Remove from the list">
 	<div id="old_page_status"></div>
 
 	<h3>How frequent do you want the reminders to be for each page visit?</h3>
-	<p>Once per</p>
-	<input type="text" id="freq" placeholder="Example: 15">
+	<p>Once every</p>
+	<input type="text" id="freq" placeholder="ex: 15">
 	<p>minute</p>
 
 	<br><br><a href="popup.html">Go Back</a>
 
+	<!-- General use library tools -->
+	<script src="tools.js"></script>
 	<script src="options.js"></script>
 
 </body>

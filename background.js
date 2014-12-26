@@ -103,7 +103,8 @@ function update_timer_check() {
 							var current_url;
 							for (var i=0; i<websites.length; i++) {
 								current_url = websites[i];
-								if (url.indexOf(current_url) > -1) {
+								if (is_monitored(url, current_url)) {
+								// if (url.indexOf(current_url) > -1) {
 									console.log(url+" is monitored");
 									return update_timer(current_url);
 								}

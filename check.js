@@ -10,7 +10,8 @@ function check_page(url) {
 		for (var i=0; i<webpages.length; i++) {
 			current = webpages[i];
 			console.log(current);
-			if (url.indexOf(current) > -1) {
+			if (is_monitored(url, current)) {
+			// if (url.indexOf(current) > -1) {
 				console.log('is monitored');
 				confirm_close(current, confirm_proceed);
 			}
@@ -59,7 +60,7 @@ function confirm_close(url, callback) {
 				cur_date = new Date(cur_ms).toJSON().slice(0,10);
 				if (date_timers[cur_date]) {
 					if (date_timers[cur_date][url]) {
-						week_spent += (date_timers[cur_date][url])/1000/60/60;
+						week_spent += ms_to_hours(date_timers[cur_date][url]);
 					}
 				}
 			}
@@ -70,12 +71,18 @@ function confirm_close(url, callback) {
 							url, '. Are you sure that you want to continue?');
 			var confirm_string = str_builder.join("");
 			console.log(confirm_string);
+
+			// bootbox.confirm(confirm_string, function(result) {
+			// 	callback(result, url);
+			// });
+
 			if (confirm(confirm_string)) {
 				callback(true, url);
 			}
 			else {
 				callback(false, url);
 			}
+
 		}
 	);
 }

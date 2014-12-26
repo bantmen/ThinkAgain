@@ -1,5 +1,3 @@
-tools();
-
 // Set the translated constants
 var HOURS = chrome.i18n.getMessage('hours');
 
