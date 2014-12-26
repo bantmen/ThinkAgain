@@ -1,12 +1,5 @@
-// Set the translated constants
-var HOURS = chrome.i18n.getMessage('hours');
-
 // Sets translated text based on user's language
 function set_all_text() {
-	function set_text(id) {
-		var text = chrome.i18n.getMessage(id);
-		document.getElementById(id).innerText = text;
-	}
 	set_text('popupTitle');
 	set_text('popupTitleExp');
 	// set_text('popupBottom');

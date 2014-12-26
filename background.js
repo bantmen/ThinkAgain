@@ -1,5 +1,3 @@
-var DELTA_T = 6000;
-
 /*
 * Listens for the requests from check.js.
 */

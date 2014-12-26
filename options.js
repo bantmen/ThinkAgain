@@ -2,12 +2,7 @@
 
 // Sets translated text based on user's language
 function set_all_text() {
-  function set_text(id) {
-    var text = chrome.i18n.getMessage(id);
-    document.getElementById(id).innerText = text;
-  }
   set_text('resetTimerText');
-  
 }
 
 // Updates th current list of monitored websites
