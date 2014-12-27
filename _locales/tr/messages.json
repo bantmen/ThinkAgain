@@ -6,12 +6,13 @@
 		"message": "(toplamda harcanılmış saat aşağıda gösterilmektedir)"
 	},
 	"popupBottom":{
-		"message": "Go to the options to add more, and choose your settings."
+		"message": "<a href='options.html'>Options</a> menüsüne gidip daha çok site ekleyebilir, 
+		ayarlarınızı değiştirebilirsiniz."
 	},
 	"hours":{
 		"message": "saat"
 	},
-	"resetTimerText":{
+	"optionsResetTimerText":{
 		"message": "Sayacı sıfırlayın"
 	}
 }

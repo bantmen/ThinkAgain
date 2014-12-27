@@ -2,7 +2,8 @@
 function set_all_text() {
 	set_text('popupTitle');
 	set_text('popupTitleExp');
-	// set_text('popupBottom');
+	set_text('popupBottom');
+	
 }
 
 function update_current() {
