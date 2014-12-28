@@ -47,7 +47,7 @@ function confirm_close(url, callback) {
 		function(result) {
 			var timers = result.time_dict;
 			var date_timers = result.date_time_dict;
-			var now = new Date().toJSON().slice(0,10);
+			var now = get_now();
 			var today = new Date();
 			var today_spent = ((date_timers[now] ? date_timers[now][url] : "0.00")/1000/60/60).toFixed(2);
 			if (isNaN(today_spent)) today_spent = "0.00"; // if date exists, but url doesnt
@@ -57,7 +57,7 @@ function confirm_close(url, callback) {
 			console.log(today);
 			for (var i=0; i<7; i++) {
 				cur_ms = today.setDate(today.getDate()-i);
-				cur_date = new Date(cur_ms).toJSON().slice(0,10);
+				cur_date = get_now(cur_ms);
 				if (date_timers[cur_date]) {
 					if (date_timers[cur_date][url]) {
 						week_spent += ms_to_hours(date_timers[cur_date][url]);

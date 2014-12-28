@@ -2,7 +2,7 @@
 
 // Sets translated text based on user's language
 function set_all_text() {
-  set_text('resetTimerText');
+  set_text('optionsResetTimerText');
 }
 
 // Updates th current list of monitored websites

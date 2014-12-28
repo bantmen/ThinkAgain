@@ -65,7 +65,7 @@ function update_timer(url) {
 				timers[url] = DELTA_T;
 			}
 			var date_timers = result.date_time_dict;
-			var now = new Date().toJSON().slice(0,10)
+			var now = get_now();
 			// If today's date wasn't added to the dict yet
 			if (!date_timers[now]) {
 				date_timers[now] = {}
@@ -82,6 +82,7 @@ function update_timer(url) {
 				{time_dict: timers, date_time_dict: date_timers}, function() {
 					console.log(current_timer);
 					console.log(date_timers);
+					console.log('time of sync:');
 				}
 			);
 		}
@@ -119,8 +120,8 @@ function update_timer_check() {
 		});
 }
 
-// Force an update of the timer every minute. 
+// Calls the update_timer_check if ...
+
+// Force an update of the timer every delta t 
 window.setInterval(update_timer_check, DELTA_T);
-
-
 
