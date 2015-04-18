@@ -17,11 +17,14 @@ function update_current() {
   		for (var i=0; i<websites.length; i++) {
   			current_website = websites[i];
   			current_timer = timers[current_website];
-  			current_hours = ms_to_hours(current_timer).toFixed(2);
-  			if (isNaN(current_hours)) current_hours = '0.00';
-  			updated_text_build.push(current_website, ' : ', 
-  							 							  current_hours, ' ', HOURS, 
-  							 							  '\n');
+  			// current_hours = ms_to_hours(current_timer).toFixed(2);
+        time_display = pretty_time(ms_to_hours(current_timer));
+  			// if (isNaN(current_hours)) current_hours = '0.00';
+  			// updated_text_build.push(current_website, ' : ', 
+  			// 				 							  time_display, ' ', HOURS, 
+  			// 				 							  '\n');
+        updated_text_build.push(current_website, ' : ', 
+                        time_display,'\n');
   		}
   		var updated_text = updated_text_build.join("");
   		console.log(updated_text);

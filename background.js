@@ -53,6 +53,8 @@ function update_timer(url) {
 	}
 	chrome.storage.sync.get({time_dict: {}, date_time_dict: {}}, 
 		function(result) {
+			console.log(result.time_dict);
+			console.log(result.date_time_dict);
 			console.log('inside update');
 			var timers = result.time_dict;
 			console.log(timers);

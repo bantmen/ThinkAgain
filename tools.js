@@ -11,6 +11,23 @@ function ms_to_hours(ms) {
 	return ((ms/(1000*60*60)));
 }
 
+// hours with decimal points -> X hours Y minutes
+function pretty_time(hours) {
+	console.log("time input: " + hours);
+	hours = parseFloat(hours);	// incase hours is a string
+	var minutes = Math.floor(hours % 1 * 60); // Round it down and get rid of decimal points 
+	hours = Math.floor(hours); 				   // Do the same for hours
+	return hours + " hours " + minutes + " minutes";
+}
+
+// X ms -> Y hours Z minutes
+function ms_to_hours_minutes(ms) {
+	var hours = ms_to_hours(ms).toFixed(2);
+	var minutes = (hours % 1 * 60).toFixed(0); // Round it down and get rid of decimal points 
+	hours = Math.floor(hours); 				   // Do the same for hours
+	return hours + " hours " + minutes + " minutes";
+}
+
 // Simple regex matching to see if monitored fits nicely in url
 function is_monitored(url, monitored) {
 	var pattern = '(.)*'+monitored+'\.'+'(.)+';
