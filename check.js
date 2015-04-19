@@ -1,6 +1,6 @@
 /*
-* Checks whether the newly launched website is in our list 
-* or not, and if so then prompts the dialog
+	Checks whether the newly launched website is in our list 
+	or not, and if so then prompts the dialog.
 */
 function check_page(url) {
 	chrome.storage.sync.get({pages: []}, function(result) {
@@ -20,27 +20,9 @@ function check_page(url) {
 	});
 }
 
-function confirm_proceed(confirmed, url) {
-	if (confirmed) {
-		console.log('cont.');
-		chrome.runtime.sendMessage({
-			action: "resume_timer", url: url 
-		}, function(response) {
-	  		console.log('response:');
-	  		console.log(response.reaction);
-		});
-	}
-	else {
-		console.log('not cont.');
-		chrome.runtime.sendMessage({
-			action: "close_current_tab", url: url
-		}, function(response) {
-	  		console.log('response:');
-	  		console.log(response.reaction);
-		});
-	}
-}
+/*
 
+*/
 function confirm_close(url, callback) {
 	chrome.storage.sync.get({time_dict: {}, date_time_dict: {}}, 
 		function(result) {
@@ -77,19 +59,63 @@ function confirm_close(url, callback) {
 			var confirm_string = str_builder.join("");
 			console.log(confirm_string);
 
-			// bootbox.confirm(confirm_string, function(result) {
-			// 	callback(result, url);
-			// });
-
-			if (confirm(confirm_string)) {
-				callback(true, url);
-			}
-			else {
-				callback(false, url);
-			}
+			think_again(url, confirm_string, callback); // Trigger the non-blocking confirmation box.
 
 		}
 	);
+}
+
+/* 
+	Noty based non-blocking confirmation box. Returns callback 
+	with true or false depending on the button click.
+*/
+function think_again(url, confirm_string, callback) {
+    var n = noty({
+        text: confirm_string,
+        type: 'confirm',
+        dismissQueue: false,
+        layout: 'center',
+        theme: 'relax',
+ buttons: [
+    // Continue button
+    {addClass: 'large green button', text: 'Continue', onClick: function($noty) {
+    	callback(true, url);
+        $noty.close();
+      }
+    },
+    // Exit button
+    {addClass: 'large red button', text: 'Exit', onClick: function($noty) {
+        callback(false, url);
+        $noty.close();
+      }
+    }
+  ]
+    })
+}
+
+/*
+	Takes the return value of the confirmation box and acts accordingly.
+	Called as the callback function.
+*/
+function confirm_proceed(confirmed, url) {
+	if (confirmed) {
+		console.log('cont.');
+		chrome.runtime.sendMessage({
+			action: "resume_timer", url: url 
+		}, function(response) {
+	  		console.log('response:');
+	  		console.log(response.reaction);
+		});
+	}
+	else {
+		console.log('not cont.');
+		chrome.runtime.sendMessage({
+			action: "close_current_tab", url: url
+		}, function(response) {
+	  		console.log('response:');
+	  		console.log(response.reaction);
+		});
+	}
 }
 
 var current_page = window.location.href;

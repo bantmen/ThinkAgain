@@ -12,7 +12,8 @@
 
 	"content_scripts": [{
 			"matches": ["http://*/*", "https://*/*"],
-  		"js": ["tools.js", "check.js"]
+      "css": ["style.css"],
+  		"js": ["js_library/jquery-2.1.3.min.js", "js_library/jquery.noty.packaged.min.js", "tools.js", "check.js"]
  	}],
 
   "options_page": "options.html",
@@ -22,7 +23,7 @@
   ],
 
   "browser_action": {
-		"default_icon": "thumbs-up.png",
+		"default_icon": "stop-sign-2.png",
 		"default_popup": "popup.html"
   } 
 }
