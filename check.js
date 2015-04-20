@@ -21,7 +21,8 @@ function check_page(url) {
 }
 
 /*
-
+	Gets the confirm_string ready and then passes url, callback and confirm_string to
+	think_again.
 */
 function confirm_close(url, callback) {
 	chrome.storage.sync.get({time_dict: {}, date_time_dict: {}}, 
@@ -32,8 +33,6 @@ function confirm_close(url, callback) {
 			var today = new Date();
 			var today_spent = date_timers[now] ? pretty_time(ms_to_hours(date_timers[now][url])) : "ERROR";
 			
-			//if (isNaN(today_spent)) today_spent = "0 Hours 0 Minutes"; // if date exists, but url doesnt
-			
 			var week_spent = 0;
 			var cur_ms;
 			var cur_date;
@@ -43,19 +42,20 @@ function confirm_close(url, callback) {
 				cur_date = get_now(cur_ms);
 				if (date_timers[cur_date]) {
 					if (date_timers[cur_date][url]) {
-						week_spent += ms_to_hours(date_timers[cur_date][url]);
+						week_spent += date_timers[cur_date][url];
 					}
 				}
 			}
-			// week_spent = week_spent.toFixed(2);
+      week_spent = ms_to_hours(week_spent);
+
 			week_spent = pretty_time(week_spent);
 			var str_builder = [];
-			// str_builder.push('You spent ', today_spent, ' hours today, ', 
-			// 				'and ', week_spent, ' hours these last 7 days on ',
-			// 				url, '. Are you sure that you want to continue?');
-			str_builder.push('You spent ', today_spent, ' today, ', 
-						'and ', week_spent, ' these last 7 days on ',
-						url, '. Are you sure that you want to continue?');
+			str_builder.push('<div align="justify">',
+											 'Time spent on ', url, ': ',
+											 '<br>Today: ', today_spent, 
+											 '<br>Past 7 days: ', week_spent,
+											 '<br>Are you sure that you want to continue?',
+											 '</div>');
 			var confirm_string = str_builder.join("");
 			console.log(confirm_string);
 
@@ -70,26 +70,26 @@ function confirm_close(url, callback) {
 	with true or false depending on the button click.
 */
 function think_again(url, confirm_string, callback) {
-    var n = noty({
+  var n = noty({
         text: confirm_string,
         type: 'confirm',
         dismissQueue: false,
         layout: 'center',
         theme: 'relax',
- buttons: [
-    // Continue button
-    {addClass: 'large green button', text: 'Continue', onClick: function($noty) {
-    	callback(true, url);
-        $noty.close();
-      }
-    },
-    // Exit button
-    {addClass: 'large red button', text: 'Exit', onClick: function($noty) {
-        callback(false, url);
-        $noty.close();
-      }
-    }
-  ]
+ 				buttons: [
+			    // If Continue button
+			    {addClass: 'large green button', text: 'Continue', onClick: function($noty) {
+			    	callback(true, url);
+			        $noty.close();
+			      }
+			    },
+			    // Else If Exit button
+			    {addClass: 'large red button', text: 'Exit', onClick: function($noty) {
+			        callback(false, url);
+			        $noty.close();
+			      }
+			    }
+			  ]
     })
 }
 

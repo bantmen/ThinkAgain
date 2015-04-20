@@ -1,4 +1,6 @@
-// Sets translated text based on user's language
+/*  
+  Sets translated text based on user's language 
+*/
 function set_all_text() {
 	set_text('popupTitle');
 	set_text('popupTitleExp');
@@ -6,6 +8,9 @@ function set_all_text() {
 	
 }
 
+/* 
+  Updates the contents of the popup according to the latest data.
+*/
 function update_current() {
   chrome.storage.sync.get({pages: [], time_dict: {}}, 
   	function(result) {
@@ -23,7 +28,7 @@ function update_current() {
   			// updated_text_build.push(current_website, ' : ', 
   			// 				 							  time_display, ' ', HOURS, 
   			// 				 							  '\n');
-        updated_text_build.push(current_website, ' : ', 
+        updated_text_build.push('<strong>', current_website, ' :</strong> ', 
                         time_display,'\n');
   		}
   		var updated_text = updated_text_build.join("");

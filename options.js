@@ -11,8 +11,9 @@ function update_current() {
   chrome.storage.sync.get({pages: []}, function(result) {
     var current = document.getElementById('current_list');
     var tracked = result.pages.toString();
+    
     if (tracked) current.textContent = tracked;
-    else current.textContent = 'No websites are currently being tracked.';
+    else         current.textContent = 'No websites are currently being tracked.';
   });
 }
 
@@ -63,11 +64,11 @@ function remove_page() {
   console.log(remove);
 }
 
-function change_frequency() {
-  chrome.storage.sync.get({frequencies: {}}, function(result) {
+// function change_frequency() {
+//   chrome.storage.sync.get({frequencies: {}}, function(result) {
 
-  });
-}
+//   });
+// }
 
 document.addEventListener('DOMContentLoaded', set_all_text());
 document.addEventListener('DOMContentLoaded', update_current());
