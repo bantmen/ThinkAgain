@@ -28,13 +28,14 @@ function update_current() {
   			// updated_text_build.push(current_website, ' : ', 
   			// 				 							  time_display, ' ', HOURS, 
   			// 				 							  '\n');
-        updated_text_build.push('<strong>', current_website, ' :</strong> ', 
-                        time_display,'\n');
+        updated_text_build.push('<strong>', current_website, ': </strong>', 
+                                time_display,'<br>');
   		}
   		var updated_text = updated_text_build.join("");
-  		console.log(updated_text);
+  		// console.log(updated_text);
   		if (updated_text) {
-  			document.getElementById('status').innerText = updated_text;
+  			// document.getElementById('status').innerText = updated_text;
+        $("#status").html(updated_text);
   		}
   		else {
   			document.getElementById('status').innerText = 'No websites are currently being tracked.';	

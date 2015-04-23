@@ -8,11 +8,11 @@
 		"description": "Explanation under popupTitle"
 	},
 	"popupBottom": {
-		"message": "Go to the <a href='options.html'>options</a> to add more, and choose your settings.",
+		"message": "Go to the <a href='options.html'>options</a> to add more, and to choose your settings.",
 		"description": "Text at the bottom of popup"
 	},
 	"hours": {
-		"message": "hours",
+		"message": "hrs",
 		"description": "Translated text for the word 'hours'"
 	},
 	"optionsResetTimerText": {

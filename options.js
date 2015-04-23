@@ -5,7 +5,7 @@ function set_all_text() {
   set_text('optionsResetTimerText');
 }
 
-// Updates th current list of monitored websites
+// Updates the current list of monitored websites
 function update_current() {
   console.log('update');
   chrome.storage.sync.get({pages: []}, function(result) {
@@ -64,13 +64,15 @@ function remove_page() {
   console.log(remove);
 }
 
-// function change_frequency() {
-//   chrome.storage.sync.get({frequencies: {}}, function(result) {
-
-//   });
-// }
+// Determines how frequent the confirmation popups can be
+function change_period() {
+  var period = document.getElementById('period').value;
+  if (!period) return ; // don't take empty input
+  localStorage['period'] = min_to_ms(period);
+}
 
 document.addEventListener('DOMContentLoaded', set_all_text());
 document.addEventListener('DOMContentLoaded', update_current());
 document.getElementById('save_page').addEventListener('click', save_page);
 document.getElementById('remove_page').addEventListener('click', remove_page);
+document.getElementById('change_period').addEventListener('click', change_period);

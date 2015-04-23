@@ -2,14 +2,18 @@
 
 /* Define the globals here */
 // i18n constants
-var HOURS = chrome.i18n.getMessage('hours');
-
+var HRS = chrome.i18n.getMessage('hours');
+var MIN = "min";
 // Rest of the constants
 var DELTA_T = 8000; // Time interval used in background.js
 
 // Need this since time is recorded and saved in ms
 function ms_to_hours(ms) {
-	return ((ms/(1000*60*60)));
+	return ms / (1000 * 60 * 60);
+}
+
+function min_to_ms(min) {
+	return min * 60 * 1000;
 }
 
 // hours with decimal points -> X hours Y minutes
@@ -22,14 +26,26 @@ function pretty_time(hours) {
 	if (isNaN(hours)) hours = 0;
 	if (isNaN(minutes)) minutes = 0;
 	
-	return hours + " " + HOURS + " " + minutes + " min";
+	return hours + " " + HRS + " " + minutes + " " + MIN;
 }
 
-// Simple regex matching to see if monitored fits nicely in url
-function is_monitored(url, monitored) {
-	var pattern = '(.)*' + monitored + '\.' + '(.)+';
+// Simple regex matching to see if page fits nicely in url
+function is_monitored(url, page) {
+	var pattern = '(.)*' + page + '\.' + '(.)+';
 	var re = new RegExp(pattern);
 	return url.match(re) ? true : false;
+}
+
+// Checks whether the page website is ready for the confirmation box
+// This depends on the period settings under options
+function is_ready(page) {
+	var period = localStorage['period'];
+	var last_popped_at = localStorage['last_popup'][page];
+	var now = new Date();
+	now = now.getTime();
+	console.log("now: " + now);
+	console.log("2: " + last_popped_at);
+	return !last_popped_at || now - last_popped_at >= period ;
 }
 
 // Gives the today's in the format: YYYY-MM-DD
